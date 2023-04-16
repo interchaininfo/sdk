@@ -1,11 +1,11 @@
 {
 	"name": "@interchaininfo/sdk",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Framework for building InterchainInfo Dashboard modules",
 	"type": "module",
 	"main": "index.js",
 	"types": "index.d.ts",
-	"repository": "https://github.com/interchainfo/sdk.git",
+	"repository": "https://github.com/interchaininfo/sdk.git",
 	"author": "Josef Leventon <josef.leventon@gmail.com>",
 	"dependencies": {
 		"@cosmjs/cosmwasm-stargate": "0.29.1",
