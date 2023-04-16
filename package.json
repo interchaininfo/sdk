@@ -1,0 +1,32 @@
+{
+  "name": "@interchaininfo/sdk",
+  "version": "0.1.0",
+  "description": "Framework for building InterchainInfo Dashboard modules",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "repository": "https://github.com/interchainfo/sdk.git",
+  "author": "Josef Leventon <josef.leventon@gmail.com>",
+  "scripts": {
+    "build": "tsc",
+    "package": "packito -d ./dist"
+  },
+  "dependencies": {
+    "@cosmjs/cosmwasm-stargate": "0.29.1",
+    "@cosmjs/proto-signing": "^0.30.1",
+    "@cosmjs/stargate": "0.29.1",
+    "@heroicons/react": "^2.0.16",
+    "@keplr-wallet/stores": "0.11.49",
+    "@keplr-wallet/types": "0.11.49",
+    "@types/semver": "^7.3.13",
+    "juno-network": "^0.14.0",
+    "react": "^18.2.0",
+    "react-hot-toast": "^2.4.0",
+    "typescript": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/elliptic": "^6.4.14",
+    "@types/react": "^18.0.29",
+    "packito": "^0.5.0"
+  }
+}

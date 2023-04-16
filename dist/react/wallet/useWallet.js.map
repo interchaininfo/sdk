@@ -1,0 +1,1 @@
+{"version":3,"file":"useWallet.js","sourceRoot":"","sources":["../../../react/wallet/useWallet.tsx"],"names":[],"mappings":"AAAA,OAAO,iBAAiB,CAAA;AACxB,OAAO,EAAE,UAAU,EAAE,MAAM,OAAO,CAAA;AAClC,OAAO,aAAa,MAAM,oBAAoB,CAAA;AAE9C,MAAM,CAAC,OAAO,UAAU,SAAS;IAC/B,MAAM,KAAK,GAAG,UAAU,CAAC,aAAa,CAAC,CAAA;IACvC,OAAO,KAAK,CAAA;AACd,CAAC"}
