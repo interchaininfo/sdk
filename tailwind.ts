@@ -10,7 +10,9 @@ module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
+    './contexts/**/*.{js,ts,jsx,tsx}',
     './node_modules/@interchaininfo/sdk/react/**/*.{js,ts,jsx,tsx}',
+    './node_modules/*-ici-widget/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
