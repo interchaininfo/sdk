@@ -15,5 +15,6 @@ export default class Wallet {
     get address(): string;
     get name(): string;
     get balance(): import("@cosmjs/amino").Coin;
+    get type(): "keplr" | "leap";
     set address(address: string);
 }

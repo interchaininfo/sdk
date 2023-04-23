@@ -34,5 +34,6 @@ export default async function getWallet(
   return {
     address: walletInfo.bech32Address,
     name: walletInfo.name,
+    type: walletType,
   }
 }

@@ -59,6 +59,10 @@ export default class Wallet {
     return this._walletInfo?.balance
   }
 
+  public get type() {
+    return this._walletInfo?.type
+  }
+
   public set address(address: string) {
     this._walletInfo = {
       ...this._walletInfo,

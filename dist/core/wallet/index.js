@@ -48,6 +48,10 @@ export default class Wallet {
         var _a;
         return (_a = this._walletInfo) === null || _a === void 0 ? void 0 : _a.balance;
     }
+    get type() {
+        var _a;
+        return (_a = this._walletInfo) === null || _a === void 0 ? void 0 : _a.type;
+    }
     set address(address) {
         this._walletInfo = Object.assign(Object.assign({}, this._walletInfo), { address });
     }
