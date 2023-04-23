@@ -41,6 +41,20 @@ const { wallet, connect, disconnect } = useWallet()
 connect('keplr')
 ```
 
+To broadcast a Cosmos transaction, use `useTx()`.
+
+```js
+import { useTx } from '@interchaininfo/sdk'
+
+const { tx } = useTx()
+
+const msgs = ... // Your Cosmos messages
+
+tx([msgs], {}, () => {
+  console.log('Transaction success!')
+})
+```
+
 ### Creating a widget
 
 ```js
@@ -57,8 +71,6 @@ const BalanceWidgetComponent = () => {
 export default new Widget(BalanceWidgetComponent, {
   name: 'Balance Widget',
   author: 'Josef Leventon <josef.leventon@gmail.com>',
-  copyright: '2023 Josef Leventon',
   version: new SemVer('1.0.0'),
 })
-
 ```

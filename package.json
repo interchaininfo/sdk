@@ -1,6 +1,6 @@
 {
   "name": "@interchaininfo/sdk",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Framework for building InterchainInfo Dashboard modules",
   "type": "module",
   "main": "index.js",
@@ -30,6 +30,7 @@
     "typescript": "^5.0.2"
   },
   "devDependencies": {
+    "@types/node": "^18.15.13",
     "@types/react": "^18.0.29",
     "packito": "^0.5.0"
   }

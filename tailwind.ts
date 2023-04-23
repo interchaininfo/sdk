@@ -15,13 +15,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        keplr: {
-          ultramarine: '#314FDF',
-          violet: '#5A00E8',
-          purple: '#8B4DFF',
-          cian: '#1BB8FF',
-          black: '#0A0718',
-          white: '#EBF7FD',
+        neutral: {
+          1000: '#090a0c',
+          900: '#0a0b0e',
+          700: '#212226',
+        },
+        primary: {
+          900: '#e38434',
+          800: '#784923',
+          700: '#4d311d',
+          600: '#221a15',
+        },
+        surface: {
+          900: '#ffffff',
+          800: '#b6b7b8',
+          700: '#868688',
+          300: '#313236',
+          200: '#202125',
+          100: '#191a1d',
         },
       },
     },
