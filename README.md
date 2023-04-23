@@ -64,7 +64,11 @@ import { SemVer } from 'semver'
 // Create a React component for your widget
 const BalanceWidgetComponent = () => {
   const { wallet } = useWallet()
-  return <div><p>Your balance is {wallet.balance} ujuno</div>
+  return (
+    <div>
+      <p>Your balance is {wallet.balance} ujuno</p>
+    </div>
+  )
 }
 
 // Export the widget from your module
