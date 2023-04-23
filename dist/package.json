@@ -1,6 +1,6 @@
 {
 	"name": "@interchaininfo/sdk",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"description": "Framework for building InterchainInfo Dashboard modules",
 	"type": "module",
 	"main": "index.js",
