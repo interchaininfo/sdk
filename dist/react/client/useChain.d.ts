@@ -1,4 +1,4 @@
 export default function useChain(): {
     client: import("../../index.js").ChainClient;
-    connectSigning: (walletType: "keplr" | "leap", denom: string) => Promise<void>;
+    connectSigning: (walletType: "keplr" | "leap" | "cosmostation", denom: string) => Promise<void>;
 };

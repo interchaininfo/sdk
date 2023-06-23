@@ -2,7 +2,7 @@ import { WalletInfo } from './types.js'
 
 export default async function getWallet(
   chainId: string,
-  walletType: 'keplr' | 'leap'
+  walletType: 'keplr' | 'leap' | 'cosmostation'
 ): Promise<WalletInfo | null> {
   window.wallet = null
 
@@ -13,6 +13,9 @@ export default async function getWallet(
     case 'leap':
       if ('leap' in window) window.wallet = window.leap
       break
+    case 'cosmostation':
+      if ('cosmostation' in window)
+        window.wallet = window.cosmostation.providers.keplr
   }
 
   const wallet = window.wallet

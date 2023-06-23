@@ -4,5 +4,5 @@ export interface WalletInfo {
   address: string
   name?: string
   balance?: Coin
-  type: 'keplr' | 'leap'
+  type: 'keplr' | 'leap' | 'cosmostation'
 }

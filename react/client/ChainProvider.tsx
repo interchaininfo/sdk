@@ -16,7 +16,7 @@ export default function ChainProvider({
   const forceUpdate = useCallback(() => updateState({}), [])
 
   const connectSigning = useCallback(
-    async (walletType: 'keplr' | 'leap', denom: string) => {
+    async (walletType: 'keplr' | 'leap' | 'cosmostation', denom: string) => {
       if (!client) return
       await client?.connectSigning(walletType, denom)
       forceUpdate()

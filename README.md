@@ -37,7 +37,7 @@ import { useWallet } from '@interchaininfo/sdk'
 
 const { wallet, connect, disconnect } = useWallet()
 
-// Connect wallet (type is 'keplr' or 'leap')
+// Connect wallet (type is 'keplr'/'leap'/'cosmostation')
 connect('keplr')
 ```
 

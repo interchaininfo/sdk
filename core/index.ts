@@ -15,6 +15,11 @@ declare global {
     wallet: Keplr
     keplr: Keplr
     leap: Keplr
+    cosmostation: {
+      providers: {
+        keplr: Keplr
+      }
+    }
   }
 }
 
@@ -63,7 +68,10 @@ export class ChainClient {
     })
   }
 
-  public async connectSigning(walletType: 'keplr' | 'leap', denom: string) {
+  public async connectSigning(
+    walletType: 'keplr' | 'leap' | 'cosmostation',
+    denom: string
+  ) {
     try {
       await this.connectSigningClient(walletType)
 
@@ -86,7 +94,9 @@ export class ChainClient {
     window.wallet = null
   }
 
-  public async connectSigningClient(walletType: 'keplr' | 'leap') {
+  public async connectSigningClient(
+    walletType: 'keplr' | 'leap' | 'cosmostation'
+  ) {
     this.signingCosmWasmClient = await getSigningCosmWasmClient(
       this.chainInfo,
       walletType

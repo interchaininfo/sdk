@@ -10,11 +10,11 @@ export default class Wallet {
         chainId: string;
     });
     getBalance(): Promise<import("@cosmjs/amino").Coin>;
-    getWallet(walletType: 'keplr' | 'leap', denom: string): Promise<WalletInfo>;
+    getWallet(walletType: 'keplr' | 'leap' | 'cosmostation', denom: string): Promise<WalletInfo>;
     get wallet(): WalletInfo | null;
     get address(): string;
     get name(): string;
     get balance(): import("@cosmjs/amino").Coin;
-    get type(): "keplr" | "leap";
+    get type(): "keplr" | "leap" | "cosmostation";
     set address(address: string);
 }

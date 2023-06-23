@@ -19,6 +19,9 @@ export default function getWallet(chainId, walletType) {
                 if ('leap' in window)
                     window.wallet = window.leap;
                 break;
+            case 'cosmostation':
+                if ('cosmostation' in window)
+                    window.wallet = window.cosmostation.providers.keplr;
         }
         const wallet = window.wallet;
         if (!wallet) {

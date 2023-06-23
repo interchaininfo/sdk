@@ -31,7 +31,10 @@ export default class Wallet {
     return this.balance
   }
 
-  public async getWallet(walletType: 'keplr' | 'leap', denom: string) {
+  public async getWallet(
+    walletType: 'keplr' | 'leap' | 'cosmostation',
+    denom: string
+  ) {
     if (!this._walletInfo) {
       const wallet = await getWallet(this.chainId, walletType)
       this._walletInfo = wallet

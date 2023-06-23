@@ -4,7 +4,7 @@ import { WalletInfo } from '../../core/wallet/types.js'
 type WalletContextValue = {
   wallet?: WalletInfo
   login: (
-    walletType: 'keplr' | 'leap',
+    walletType: 'keplr' | 'leap' | 'cosmostation',
     denom: string
   ) => Promise<WalletInfo | void>
   logout: () => void

@@ -14,7 +14,7 @@ import type { ChainInfo } from '@keplr-wallet/types'
 
 export default async function getSigningCosmWasmClient(
   chainInfo: ChainInfo,
-  walletType: 'keplr' | 'leap'
+  walletType: 'keplr' | 'leap' | 'cosmostation'
 ): Promise<SigningCosmWasmClient | null> {
   if (!chainInfo) {
     throw new Error('No Chain Info provided to connect CosmWasmClient')

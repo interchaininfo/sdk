@@ -13,7 +13,7 @@ export default function WalletProvider({ children }: { children: ReactNode }) {
   }, [client])
 
   const login = useCallback(
-    async (walletType: 'keplr' | 'leap', denom: string) => {
+    async (walletType: 'keplr' | 'leap' | 'cosmostation', denom: string) => {
       await client?.connect()
       await client?.connectSigning(walletType, denom)
 

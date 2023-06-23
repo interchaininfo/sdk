@@ -7,6 +7,11 @@ declare global {
         wallet: Keplr;
         keplr: Keplr;
         leap: Keplr;
+        cosmostation: {
+            providers: {
+                keplr: Keplr;
+            };
+        };
     }
 }
 export interface ChainClientConstructor {
@@ -22,9 +27,9 @@ export declare class ChainClient {
     private _wallet;
     constructor({ chainInfo }: ChainClientConstructor);
     connect(): Promise<void>;
-    connectSigning(walletType: 'keplr' | 'leap', denom: string): Promise<import("./wallet/types.js").WalletInfo>;
+    connectSigning(walletType: 'keplr' | 'leap' | 'cosmostation', denom: string): Promise<import("./wallet/types.js").WalletInfo>;
     disconnectSigning(): Promise<void>;
-    connectSigningClient(walletType: 'keplr' | 'leap'): Promise<SigningCosmWasmClient>;
+    connectSigningClient(walletType: 'keplr' | 'leap' | 'cosmostation'): Promise<SigningCosmWasmClient>;
     get cosmWasmClient(): CosmWasmClient;
     get wallet(): Wallet;
 }
