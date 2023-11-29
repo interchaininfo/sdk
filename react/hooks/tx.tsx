@@ -1,7 +1,11 @@
 import { createContext, ReactNode, useContext } from 'react'
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx.js'
-import { isDeliverTxSuccess } from '@cosmjs/stargate'
-import { coins } from '@cosmjs/stargate'
+import {
+  GasPrice,
+  isDeliverTxSuccess,
+  coins,
+} from '@cosmjs/cosmwasm-stargate/node_modules/@cosmjs/stargate'
+import { Uint53 } from '@cosmjs/cosmwasm-stargate/node_modules/@cosmjs/math'
 import useToaster, { ToastPayload, ToastTypes } from './useToaster.js'
 import useChain from '../client/useChain.js'
 import useWallet from '../wallet/useWallet.js'
@@ -31,6 +35,19 @@ export const Tx = createContext<TxContext>({
   tx: () => new Promise(() => {}),
 })
 
+const calculateFee = (gas: number, gasDenom: string) => {
+  const gasLimit = Math.round(gas * 1.5)
+  const { denom, amount: gasPriceAmount } = GasPrice.fromString(
+    `0.1${gasDenom}`
+  )
+  const amount = gasPriceAmount.multiply(new Uint53(gasLimit)).ceil().toString()
+
+  return {
+    amount: coins(amount, denom),
+    gas: String(gasLimit),
+  }
+}
+
 export function TxProvider({ children }: { children: ReactNode }) {
   const { client } = useChain()
   const { refreshBalance } = useWallet()
@@ -39,22 +56,22 @@ export function TxProvider({ children }: { children: ReactNode }) {
 
   // Method to sign & broadcast transaction
   const tx = async (msgs: Msg[], options: TxOptions, callback?: () => void) => {
-    // Gas config
-    const fee = {
-      amount: coins(1667, options.denom || 'ujuno'),
-      gas: options.gas ? String(options.gas) : '666666',
-    }
+    // Simulate transaction and calculate gas
+    const gas = await client.signingCosmWasmClient.simulate(
+      client.wallet.wallet.address,
+      msgs,
+      ''
+    )
+    const fee = calculateFee(gas, options.denom || 'ujuno')
 
     let signed
     try {
-      if (client?.wallet.wallet.address) {
-        signed = await client?.signingCosmWasmClient?.sign(
-          client?.wallet.wallet.address,
-          msgs,
-          fee,
-          ''
-        )
-      }
+      signed = await client.signingCosmWasmClient.sign(
+        client.wallet.wallet.address,
+        msgs,
+        fee,
+        ''
+      )
     } catch (e) {
       console.log(e)
       return toaster.toast({

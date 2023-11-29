@@ -10,31 +10,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { Fragment as _Fragment, jsx as _jsx } from "react/jsx-runtime";
 import { createContext, useContext } from 'react';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx.js';
-import { isDeliverTxSuccess } from '@cosmjs/stargate';
-import { coins } from '@cosmjs/stargate';
+import { GasPrice, isDeliverTxSuccess, coins, } from '@cosmjs/cosmwasm-stargate/node_modules/@cosmjs/stargate';
+import { Uint53 } from '@cosmjs/cosmwasm-stargate/node_modules/@cosmjs/math';
 import useToaster, { ToastTypes } from './useToaster.js';
 import useChain from '../client/useChain.js';
 import useWallet from '../wallet/useWallet.js';
 export const Tx = createContext({
     tx: () => new Promise(() => { }),
 });
+const calculateFee = (gas, gasDenom) => {
+    const gasLimit = Math.round(gas * 1.5);
+    const { denom, amount: gasPriceAmount } = GasPrice.fromString(`0.1${gasDenom}`);
+    const amount = gasPriceAmount.multiply(new Uint53(gasLimit)).ceil().toString();
+    return {
+        amount: coins(amount, denom),
+        gas: String(gasLimit),
+    };
+};
 export function TxProvider({ children }) {
     const { client } = useChain();
     const { refreshBalance } = useWallet();
     const toaster = useToaster();
     // Method to sign & broadcast transaction
     const tx = (msgs, options, callback) => __awaiter(this, void 0, void 0, function* () {
-        var _a;
-        // Gas config
-        const fee = {
-            amount: coins(1667, options.denom || 'ujuno'),
-            gas: options.gas ? String(options.gas) : '666666',
-        };
+        // Simulate transaction and calculate gas
+        const gas = yield client.signingCosmWasmClient.simulate(client.wallet.wallet.address, msgs, '');
+        const fee = calculateFee(gas, options.denom || 'ujuno');
         let signed;
         try {
-            if (client === null || client === void 0 ? void 0 : client.wallet.wallet.address) {
-                signed = yield ((_a = client === null || client === void 0 ? void 0 : client.signingCosmWasmClient) === null || _a === void 0 ? void 0 : _a.sign(client === null || client === void 0 ? void 0 : client.wallet.wallet.address, msgs, fee, ''));
-            }
+            signed = yield client.signingCosmWasmClient.sign(client.wallet.wallet.address, msgs, fee, '');
         }
         catch (e) {
             console.log(e);
