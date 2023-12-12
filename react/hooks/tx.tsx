@@ -4,8 +4,8 @@ import {
   GasPrice,
   isDeliverTxSuccess,
   coins,
-} from '@cosmjs/cosmwasm-stargate/node_modules/@cosmjs/stargate'
-import { Uint53 } from '@cosmjs/cosmwasm-stargate/node_modules/@cosmjs/math'
+  DeliverTxResponse,
+} from '@cosmjs/stargate'
 import useToaster, { ToastPayload, ToastTypes } from './useToaster.js'
 import useChain from '../client/useChain.js'
 import useWallet from '../wallet/useWallet.js'
@@ -40,7 +40,10 @@ const calculateFee = (gas: number, gasDenom: string) => {
   const { denom, amount: gasPriceAmount } = GasPrice.fromString(
     `0.1${gasDenom}`
   )
-  const amount = gasPriceAmount.multiply(new Uint53(gasLimit)).ceil().toString()
+
+  const amount = Math.ceil(
+    gasPriceAmount.toFloatApproximation() * gasLimit
+  ).toString()
 
   return {
     amount: coins(amount, denom),
@@ -96,7 +99,7 @@ export function TxProvider({ children }: { children: ReactNode }) {
         .broadcastTx(Uint8Array.from(TxRaw.encode(signed).finish()))
         .then((res) => {
           toaster.dismiss(broadcastToastId)
-          if (isDeliverTxSuccess(res)) {
+          if (isDeliverTxSuccess(res as DeliverTxResponse)) {
             // Run callback
             if (callback) callback()
 

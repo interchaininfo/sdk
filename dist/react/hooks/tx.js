@@ -10,8 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { Fragment as _Fragment, jsx as _jsx } from "react/jsx-runtime";
 import { createContext, useContext } from 'react';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx.js';
-import { GasPrice, isDeliverTxSuccess, coins, } from '@cosmjs/cosmwasm-stargate/node_modules/@cosmjs/stargate';
-import { Uint53 } from '@cosmjs/cosmwasm-stargate/node_modules/@cosmjs/math';
+import { GasPrice, isDeliverTxSuccess, coins, } from '@cosmjs/stargate';
 import useToaster, { ToastTypes } from './useToaster.js';
 import useChain from '../client/useChain.js';
 import useWallet from '../wallet/useWallet.js';
@@ -21,7 +20,7 @@ export const Tx = createContext({
 const calculateFee = (gas, gasDenom) => {
     const gasLimit = Math.round(gas * 1.5);
     const { denom, amount: gasPriceAmount } = GasPrice.fromString(`0.1${gasDenom}`);
-    const amount = gasPriceAmount.multiply(new Uint53(gasLimit)).ceil().toString();
+    const amount = Math.ceil(gasPriceAmount.toFloatApproximation() * gasLimit).toString();
     return {
         amount: coins(amount, denom),
         gas: String(gasLimit),
