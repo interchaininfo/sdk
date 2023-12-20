@@ -20,6 +20,7 @@ export interface ChainClientConstructor {
 export declare class ChainClient {
     private _cosmWasmClient;
     signingCosmWasmClient: SigningCosmWasmClient | null;
+    baseWallet: Keplr | null;
     api: Awaited<ReturnType<typeof juno.ClientFactory.createLCDClient>> | null;
     osmosisClient: Awaited<ReturnType<typeof osmosis.ClientFactory.createRPCQueryClient>> | null;
     junoClient: Awaited<ReturnType<typeof juno.ClientFactory.createRPCQueryClient>> | null;

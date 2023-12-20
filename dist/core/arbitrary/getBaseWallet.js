@@ -7,22 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// import {
-//   AminoTypes,
-//   createGovAminoConverters,
-//   createBankAminoConverters,
-//   createStakingAminoConverters,
-//   createDistributionAminoConverters,
-// } from '@cosmjs/stargate'
-import { 
-// createWasmAminoConverters,
-SigningCosmWasmClient, } from '@cosmjs/cosmwasm-stargate';
-import { gasPrice } from '../config/gas.js';
-export default function getSigningCosmWasmClient(chainInfo, walletType) {
+export default function getBaseWallet(walletType) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (!chainInfo) {
-            throw new Error('No Chain Info provided to connect CosmWasmClient');
-        }
         switch (walletType) {
             case 'keplr':
                 window.wallet = window.keplr;
@@ -46,22 +32,7 @@ export default function getSigningCosmWasmClient(chainInfo, walletType) {
                 },
             };
         }
-        yield wallet.experimentalSuggestChain(chainInfo);
-        yield wallet.enable(chainInfo.chainId);
-        // get offline signer for signing txs
-        const offlineSigner = yield wallet.getOfflineSignerAuto(chainInfo.chainId);
-        // make client
-        // const customAminoTypes = new AminoTypes({
-        //   ...createWasmAminoConverters(),
-        //   ...createGovAminoConverters(),
-        //   ...createBankAminoConverters(),
-        //   ...createStakingAminoConverters('ujuno'),
-        //   ...createDistributionAminoConverters(),
-        // })
-        const client = yield SigningCosmWasmClient.connectWithSigner(chainInfo.rpc, offlineSigner, {
-            gasPrice,
-        });
-        return client;
+        return wallet;
     });
 }
-//# sourceMappingURL=getSigningCosmWasmClient.js.map
+//# sourceMappingURL=getBaseWallet.js.map

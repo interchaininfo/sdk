@@ -11,10 +11,12 @@ import getCosmWasmClient from './cosmwasm/getCosmWasmClient.js';
 import getSigningCosmWasmClient from './cosmwasm/getSigningCosmWasmClient.js';
 import Wallet from './wallet/index.js';
 import { juno, osmosis } from 'juno-network';
+import getBaseWallet from './arbitrary/getBaseWallet.js';
 export class ChainClient {
     constructor({ chainInfo }) {
         this._cosmWasmClient = null;
         this.signingCosmWasmClient = null;
+        this.baseWallet = null;
         this.api = null;
         this.osmosisClient = null;
         this.junoClient = null;
@@ -47,6 +49,7 @@ export class ChainClient {
                 if (!this.signingCosmWasmClient)
                     throw new Error('Could not load SigningCosmWasmClient');
                 const wallet = yield this.wallet.getWallet(walletType, denom);
+                this.baseWallet = yield getBaseWallet(walletType);
                 return wallet;
             }
             catch (e) {

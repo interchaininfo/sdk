@@ -27,6 +27,8 @@ export default async function getSigningCosmWasmClient(
     case 'leap':
       window.wallet = window.leap
       break
+    case 'cosmostation':
+      window.wallet = window.cosmostation.providers.keplr
   }
 
   const wallet = window.wallet

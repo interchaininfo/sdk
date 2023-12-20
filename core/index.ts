@@ -9,6 +9,7 @@ import getSigningCosmWasmClient from './cosmwasm/getSigningCosmWasmClient.js'
 import Wallet from './wallet/index.js'
 
 import { juno, osmosis } from 'juno-network'
+import getBaseWallet from './arbitrary/getBaseWallet.js'
 
 declare global {
   interface Window {
@@ -30,6 +31,8 @@ export interface ChainClientConstructor {
 export class ChainClient {
   private _cosmWasmClient: CosmWasmClient | null = null
   public signingCosmWasmClient: SigningCosmWasmClient | null = null
+
+  public baseWallet: Keplr | null = null
 
   public api: Awaited<
     ReturnType<typeof juno.ClientFactory.createLCDClient>
@@ -81,6 +84,8 @@ export class ChainClient {
         throw new Error('Could not load SigningCosmWasmClient')
 
       const wallet = await this.wallet.getWallet(walletType, denom)
+
+      this.baseWallet = await getBaseWallet(walletType)
 
       return wallet
     } catch (e) {
